@@ -52,7 +52,7 @@ public class UserMealsUtilTest {
     }
 
     @Test
-    public void getFilteredByExceed_wholeDay(){
+    public void getFilteredByExceedWholeDay(){
         List<UserMealWithExceed> mealWithExceeds =
                 UserMealsUtil.getFilteredWithExceeded(mealList, LocalTime.of(1, 0), LocalTime.of(23,0), 2000);
 
@@ -60,7 +60,7 @@ public class UserMealsUtilTest {
     }
 
     @Test
-    public void getFilteredByExceed_onlyDinner(){
+    public void getFilteredByExceedOnlyDinner(){
         List<UserMealWithExceed> mealWithExceeds =
                 UserMealsUtil.getFilteredWithExceeded(mealList, LocalTime.of(11, 0), LocalTime.of(16,0), 2000);
 
@@ -68,7 +68,7 @@ public class UserMealsUtilTest {
     }
 
     @Test
-    public void getFilteredByExceed_exceedCorrect(){
+    public void getFilteredByExceedExceedCorrect(){
         List<UserMealWithExceed> mealWithExceeds =
                 UserMealsUtil.getFilteredWithExceeded(mealList, LocalTime.of(0, 0), LocalTime.of(23,0), 2000);
 
