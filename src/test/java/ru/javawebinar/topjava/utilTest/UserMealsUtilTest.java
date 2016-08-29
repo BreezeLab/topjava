@@ -23,59 +23,60 @@ import ru.javawebinar.topjava.util.UserMealsUtil;
  */
 public class UserMealsUtilTest {
     static List<UserMeal> mealList;
+
     @BeforeClass
-    public static void initMealList(){
+    public static void initMealList() {
         mealList = Arrays.asList(
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30,10,0), "Завтрак", 500),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30,13,0), "Обед", 1000),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30,20,0), "Ужин", 500),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,10,0), "Завтрак", 1000),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,13,0), "Обед", 500),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,20,0), "Ужин", 510)
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
         );
     }
 
     @Test
-    public void getCaloriesAtDays(){
+    public void getCaloriesAtDays() {
 
         Map<LocalDate, Integer> caloriesPerDay = UserMealsUtil.getCaloriesAtDays(mealList);
 
-        LocalDate thirtyMay = LocalDate.of(2015,Month.MAY,30);
-        LocalDate thirtyOneMay = LocalDate.of(2015,Month.MAY,31);
+        LocalDate thirtyMay = LocalDate.of(2015, Month.MAY, 30);
+        LocalDate thirtyOneMay = LocalDate.of(2015, Month.MAY, 31);
 
         Assert.assertNotNull(caloriesPerDay.get(thirtyMay));
         Assert.assertNotNull(caloriesPerDay.get(thirtyOneMay));
-        Assert.assertEquals(2000,caloriesPerDay.get(thirtyMay).intValue());
-        Assert.assertEquals(2010,caloriesPerDay.get(thirtyOneMay).intValue());
+        Assert.assertEquals(2000, caloriesPerDay.get(thirtyMay).intValue());
+        Assert.assertEquals(2010, caloriesPerDay.get(thirtyOneMay).intValue());
 
         Assert.assertEquals(2, caloriesPerDay.entrySet().size());
     }
 
     @Test
-    public void getFilteredByExceedWholeDay(){
+    public void getFilteredByExceedWholeDay() {
         List<UserMealWithExceed> mealWithExceeds =
-                UserMealsUtil.getFilteredWithExceeded(mealList, LocalTime.of(1, 0), LocalTime.of(23,0), 2000);
+                UserMealsUtil.getFilteredWithExceeded(mealList, LocalTime.of(1, 0), LocalTime.of(23, 0), 2000);
 
         Assert.assertEquals(6, mealWithExceeds.size());
     }
 
     @Test
-    public void getFilteredByExceedOnlyDinner(){
+    public void getFilteredByExceedOnlyDinner() {
         List<UserMealWithExceed> mealWithExceeds =
-                UserMealsUtil.getFilteredWithExceeded(mealList, LocalTime.of(11, 0), LocalTime.of(16,0), 2000);
+                UserMealsUtil.getFilteredWithExceeded(mealList, LocalTime.of(11, 0), LocalTime.of(16, 0), 2000);
 
         Assert.assertEquals(2, mealWithExceeds.size());
     }
 
     @Test
-    public void getFilteredByExceedExceedCorrect(){
+    public void getFilteredByExceedExceedCorrect() {
         List<UserMealWithExceed> mealWithExceeds =
-                UserMealsUtil.getFilteredWithExceeded(mealList, LocalTime.of(0, 0), LocalTime.of(23,0), 2000);
+                UserMealsUtil.getFilteredWithExceeded(mealList, LocalTime.of(0, 0), LocalTime.of(23, 0), 2000);
 
         int countExceed = 0;
         int countNotExceed = 0;
-        for (UserMealWithExceed meal: mealWithExceeds) {
-            if(meal.getExceed()){
+        for (UserMealWithExceed meal : mealWithExceeds) {
+            if (meal.getExceed()) {
                 countExceed += 1;
             } else {
                 countNotExceed += 1;

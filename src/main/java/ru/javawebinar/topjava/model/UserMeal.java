@@ -25,8 +25,13 @@ public class UserMeal {
         return dateTime;
     }
 
-    public LocalDate getLocalDate() {   return dateTime.toLocalDate();  }
-    public LocalTime getLocalTime() {   return dateTime.toLocalTime();  }
+    public LocalDate getLocalDate() {
+        return dateTime.toLocalDate();
+    }
+
+    public LocalTime getLocalTime() {
+        return dateTime.toLocalTime();
+    }
 
     public String getDescription() {
         return description;
@@ -38,8 +43,8 @@ public class UserMeal {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof UserMeal){
-            UserMeal equalCandidate = (UserMeal)obj;
+        if (obj instanceof UserMeal) {
+            UserMeal equalCandidate = (UserMeal) obj;
             return getCalories() == equalCandidate.getCalories() &&
                     getDateTime().equals(equalCandidate.getDateTime()) &&
                     getDescription().equals(equalCandidate.getDescription());

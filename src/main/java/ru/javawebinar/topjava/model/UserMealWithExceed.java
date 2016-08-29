@@ -21,8 +21,13 @@ public class UserMealWithExceed {
         return dateTime;
     }
 
-    public LocalDate getLocalDate() {   return dateTime.toLocalDate();  }
-    public LocalTime getLocalTime() {   return dateTime.toLocalTime();  }
+    public LocalDate getLocalDate() {
+        return dateTime.toLocalDate();
+    }
+
+    public LocalTime getLocalTime() {
+        return dateTime.toLocalTime();
+    }
 
     public String getDescription() {
         return description;
@@ -32,7 +37,7 @@ public class UserMealWithExceed {
         return calories;
     }
 
-    public boolean getExceed(){
+    public boolean getExceed() {
         return this.exceed;
     }
 
@@ -48,11 +53,12 @@ public class UserMealWithExceed {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof UserMealWithExceed){
-            UserMeal equalCandidate = (UserMeal)obj;
+        if (obj instanceof UserMealWithExceed) {
+            UserMeal equalCandidate = (UserMeal) obj;
             return getCalories() == equalCandidate.getCalories() &&
                     getDateTime().equals(equalCandidate.getDateTime()) &&
                     getDescription().equals(equalCandidate.getDescription());
+
         }
         return false;
     }
@@ -64,7 +70,7 @@ public class UserMealWithExceed {
         this.exceed = exceed;
     }
 
-    public UserMealWithExceed(UserMeal userMeal, boolean exceed){
+    public UserMealWithExceed(UserMeal userMeal, boolean exceed) {
         this.dateTime = userMeal.getDateTime();
         this.description = userMeal.getDescription();
         this.calories = userMeal.getCalories();
