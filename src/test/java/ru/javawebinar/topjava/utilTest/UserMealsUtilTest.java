@@ -1,6 +1,6 @@
 package ru.javawebinar.topjava.utilTest;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -85,4 +85,17 @@ public class UserMealsUtilTest {
         Assert.assertEquals(3, countExceed);
         Assert.assertEquals(3, countNotExceed);
     }
+
+    @Test
+    public void getFilteredByStream() {
+        List<UserMealWithExceed> streamMealsWithExceeds =
+                UserMealsUtil.getFilteredWithExceededByStreamAPI(mealList, LocalTime.of(0, 0), LocalTime.of(23, 0), 2000);
+
+        List<UserMealWithExceed> mealWithExceeds =
+                UserMealsUtil.getFilteredWithExceeded(mealList, LocalTime.of(0, 0), LocalTime.of(23, 0), 2000);
+
+        Assert.assertEquals(true, streamMealsWithExceeds.equals(mealWithExceeds));
+
+    }
+
 }

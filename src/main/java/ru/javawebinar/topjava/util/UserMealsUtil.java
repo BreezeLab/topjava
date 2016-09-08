@@ -8,12 +8,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
-/**
- * GKislin
- * 31.05.2015.
- */
+
 public class UserMealsUtil {
     public static void main(String[] args) {
         List<UserMeal> mealList = Arrays.asList(
@@ -50,6 +48,22 @@ public class UserMealsUtil {
             }
         }
         return returnList;
+    }
+
+    public static List<UserMealWithExceed> getFilteredWithExceededByStreamAPI(
+            List<UserMeal> mealList,
+            LocalTime startTime,
+            LocalTime endTime,
+            int caloriesPerDay) {
+
+        Map<LocalDate, Integer> sumCaloriesByDay = mealList.stream().collect(Collectors.groupingBy(
+                UserMeal::getLocalDate,
+                Collectors.summingInt(UserMeal::getCalories)));
+
+        return mealList.stream()
+                .filter(um -> TimeUtil.isBetween(um.getLocalTime(), startTime, endTime))
+                .map(um -> new UserMealWithExceed(um, sumCaloriesByDay.get(um.getLocalDate()) > caloriesPerDay))
+                .collect(Collectors.toList());
     }
 
     public static Map<LocalDate, Integer> getCaloriesAtDays(List<UserMeal> mealList) {

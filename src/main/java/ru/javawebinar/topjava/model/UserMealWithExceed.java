@@ -54,7 +54,7 @@ public class UserMealWithExceed {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof UserMealWithExceed) {
-            UserMeal equalCandidate = (UserMeal) obj;
+            UserMealWithExceed equalCandidate = (UserMealWithExceed) obj;
             return getCalories() == equalCandidate.getCalories() &&
                     getDateTime().equals(equalCandidate.getDateTime()) &&
                     getDescription().equals(equalCandidate.getDescription());
